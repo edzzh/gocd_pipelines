@@ -71,8 +71,8 @@ pipelines:
                 - build:
                     source: report_dev.html
                     destination: test-output
-                tabs:
-                  Report: test-output/report_dev.html
+              tabs:
+                Report: test-output/report_dev.html
               tasks: *test-tasks
       - deploy-int:
           environment_variables:
@@ -89,8 +89,8 @@ pipelines:
                 - build:
                     source: report_int.html
                     destination: test-output
-                tabs:
-                  Report: test-output/report_int.html
+              tabs:
+                Report: test-output/report_int.html
               tasks: *test-tasks
       - deploy-prd:
           environment_variables:
@@ -107,6 +107,6 @@ pipelines:
                 - build:
                     source: report_prd.html
                     destination: test-output
-                tabs:
-                  Report: test-output/report_prd.html
+              tabs:
+                Report: test-output/report_prd.html
               tasks: *test-tasks
