@@ -1,5 +1,13 @@
 ---
 format_version: 10
+common:
+  deploy-tasks: &deploy-tasks
+    - exec:
+        command: bash
+        argument:
+          - -c
+          - echo "Deploy on ${ENV_NAME} env"
+
 pipelines:
   java_microservice:
     group: microservices
@@ -22,14 +30,11 @@ pipelines:
                       - -c
                       - echo "Building JAVA application..."
       - deploy-dev:
+          environment_variables:
+            ENV_NAME: dev
           jobs:
-            build:
-              tasks:
-                - exec:
-                    command: bash
-                    arguments:
-                      - -c
-                      - echo "Deploy to DEV"
+            deploy:
+              tasks: *deploy-tasks
       - test-dev:
           jobs:
             build:
@@ -40,14 +45,11 @@ pipelines:
                       - -c
                       - echo "Tests execution on DEV"
       - deploy-int:
+          environment_variables:
+            ENV_NAME: int
           jobs:
-            build:
-              tasks:
-                - exec:
-                    command: bash
-                    arguments:
-                      - -c
-                      - echo "Deploy to INT"
+            deploy:
+              tasks: *deploy-tasks
       - test-int:
           jobs:
             build:
@@ -58,14 +60,11 @@ pipelines:
                       - -c
                       - echo "Tests execution on INT"
       - deploy-prd:
+          environment_variables:
+            ENV_NAME: prd
           jobs:
-            build:
-              tasks:
-                - exec:
-                    command: bash
-                    arguments:
-                      - -c
-                      - echo "Deploy to PRD"
+            deploy:
+              tasks: *deploy-tasks
       - test-prd:
           jobs:
             build:
